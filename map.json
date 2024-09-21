@@ -8,7 +8,7 @@
     {
     "projection": {"type":"identity","reflectY":true},
     "data": {
-      "url": "https://github.com/Maitrey0152/FIT3179_week9_homework/tree/40137b57c6afb3900f8ffcefa13b2d5d30cc1add/topojson/map.topojson",
+      "url": "map.topojson",
       "format": {
         "type": "topojson",
         "feature": "collection"
