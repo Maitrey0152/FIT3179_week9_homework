@@ -1,0 +1,66 @@
+{
+    "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+    "title":{"text":"Map of central melbourne depicting average household income","fontSize":24},
+    "width": 1000,
+    "height": 500,
+    "background":"lightgrey",
+    "layer": [
+    {
+    "projection": {"type":"identity","reflectY":true},
+    "data": {
+      "url": "/topojson/map.topojson",
+      "format": {
+        "type": "topojson",
+        "feature": "collection"
+      }
+      
+    },
+    "transform": [
+    {"filter": {"field": "properties.name", "oneOf": ["Melbourne (CBD)","West Melbourne","Docklands","North Melbourne","Kensington","Carlton","Parkville","East Melbourne","Port Melbourne","South Melbourne","Southbank","South Yarra"]}},
+    {
+      "lookup": "properties.name",
+      "from": {
+        "data": {"values": [
+          {"name": "Melbourne (CBD)", "value": 2006},
+          {"name": "West Melbourne", "value": 1788},
+          {"name": "Docklands", "value": 1956},
+          {"name": "North Melbourne", "value": 1717},
+          {"name": "Kensington", "value": 2216},
+          {"name": "Carlton", "value": 1292},
+          {"name": "Parkville", "value": 1885},
+          {"name": "East Melbourne", "value": 2345},
+          {"name": "Port Melbourne", "value": 1997},
+          {"name": "South Melbourne", "value": 1483},
+          {"name": "Southbank", "value": 1838},
+          {"name": "South Yarra", "value": 1694}
+        ]},
+        "key": "name",
+        "fields": ["name", "value"]
+      }
+    }
+  ],
+
+    "mark": {"type": "geoshape","stroke": "#212121",
+        "strokeWidth": 5},
+    
+    
+    "encoding": {
+    "color": {
+      "field": "value",
+      "type": "quantitative",
+      "scale": {"scheme": "blues", "type":"log"},
+      
+    "legend": {
+            "title": "Household income",
+            "titleFontSize":18,
+            "labelFontSize":14,
+            "format": "$,.0f"
+          }},
+    "tooltip": [
+      {"field": "properties.name", "type": "nominal", "title": "Name"},
+      {"field": "value", "type": "nominal", "title": "Household Income","format": "$,.0f"}]
+  }
+    }
+  ]
+}
+  
